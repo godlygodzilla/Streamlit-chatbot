@@ -9,36 +9,36 @@ import pandas as pd
 
 # Function to get a response from the Django backend
 def get_response(user_input):
-    # url = 'http://127.0.0.1:8000/chat/chatbot/'
-    # headers = {'Content-Type': 'application/json'}
-    # payload = {
-    #     'username': 'example_user',
-    #     'mode': 'ASK',
-    #     'question': user_input,
-    #     'table_key': 'congestion'
-    # }
+     url = 'http://127.0.0.1:8000/chat/chatbot/'
+     headers = {'Content-Type': 'application/json'}
+     payload = {
+         'username': 'example_user',
+         'mode': 'ASK',
+         'question': user_input,
+         'table_key': 'congestion'
+     }
     
-    # response = requests.post(url, headers=headers, data=json.dumps(payload))
+     response = requests.post(url, headers=headers, data=json.dumps(payload))
     
-    # if response.status_code == 200:
-    #     data = response.json().get('data', {})
-    #     return data.get('sql', 'No SQL query generated'), data.get('df', 'No data frame generated'), data.get('text_summary', 'No summary generated'), data.get('plot', 'No plot generated')
-    # else:
-    #     return None, None, None, None
-    username = 'example_user'
-    mode = 'ASK'
-    question = user_input
-    table_key = 'congestion'
+     if response.status_code == 200:
+         data = response.json().get('data', {})
+         return data.get('sql', 'No SQL query generated'), data.get('df', 'No data frame generated'), data.get('text_summary', 'No summary generated'), data.get('plot', 'No plot generated')
+     else:
+         return None, None, None, None
+    #username = 'example_user'
+    #mode = 'ASK'
+    #question = user_input
+    #table_key = 'congestion'
 
-    result = run_code(question, table_key, username, mode)
+    #result = run_code(question, table_key, username, mode)
 
     # Check if run_code returned None
-    if result is None:
-        return None, None, None, None
+    #if result is None:
+    #    return None, None, None, None
 
-    sql, df, text_summary, plot = result
+    #sql, df, text_summary, plot = result
 
-    return sql, df, text_summary, plot
+    #return sql, df, text_summary, plot
     
 def display_plot(plot_base64):
     if plot_base64:
