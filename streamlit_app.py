@@ -56,6 +56,8 @@ with st.form(key='chat_form'):
     user_input = st.text_input("You: ", key='user_input')
     submit_button = st.form_submit_button(label='Send')
 
+show_plot = st.checkbox("Plot", value=True)
+
 if submit_button and user_input:
     sql, df, text_summary, plot = get_response(user_input)
     df = df.to_dict(orient='records') if isinstance(df, pd.DataFrame) else df
