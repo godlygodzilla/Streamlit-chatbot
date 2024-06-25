@@ -16,7 +16,6 @@ def get_response(user_input,show_plot,show_text_summary):
         'question': user_input,
         'table_key': 'congestion',
         'show_plot': show_plot,
-        'show_text_summary': show_text_summary
     }
     
     response = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -47,7 +46,7 @@ show_text_summary= st.checkbox("text_summary", value=True)
 show_plot = st.checkbox("Plot", value=False)
 
 if submit_button and user_input:
-    sql, df, text_summary, plot = get_response(user_input,show_plot,show_text_summary)
+    sql, df, text_summary, plot = get_response(user_input,show_plot)
     df = df.to_dict(orient='records') if isinstance(df, pd.DataFrame) else df
 
     print("sql   ",sql,"\ndf   ",df,"\n summary   ",text_summary,"\n plot    ",plot)
@@ -60,7 +59,7 @@ if submit_button and user_input:
     })
 
 for entry in st.session_state.conversation:
-    st.write(f"**You:** {entry['user_input']}")
+    st.markdown(f"<b style='color:blue;'>You:</b> {entry['user_input']}", unsafe_allow_html=True)
     if entry['sql']:
         st.write(f"**SQL Query:**\n {entry['sql']}")
     if entry['df']:
