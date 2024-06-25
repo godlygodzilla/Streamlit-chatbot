@@ -8,14 +8,16 @@ from PIL import Image
 import pandas as pd
 
 # Function to get a response from the Django backend
-def get_response(user_input):
+def get_response(user_input,show_plot,show_text_summary):
      url = 'http://square-martin-obliging.ngrok-free.app/chat/chatbot/'
      headers = {'Content-Type': 'application/json'}
      payload = {
          'username': 'example_user',
          'mode': 'ASK',
          'question': user_input,
-         'table_key': 'congestion'
+         'table_key': 'congestion',
+         'show_plot': show_plot,
+         'show_text_summary': show_text_summary
      }
     
      response = requests.post(url, headers=headers, data=json.dumps(payload))
@@ -57,9 +59,10 @@ with st.form(key='chat_form'):
     submit_button = st.form_submit_button(label='Send')
 
 show_plot = st.checkbox("Plot", value=True)
+show_text_summary = st.checkbox("Text Summary", value=True)
 
 if submit_button and user_input:
-    sql, df, text_summary, plot = get_response(user_input)
+    sql, df, text_summary, plot = get_response(user_input,show_plot,show_text_summary)
     df = df.to_dict(orient='records') if isinstance(df, pd.DataFrame) else df
 
     print("sql   ",sql,"\ndf   ",df,"\n summary   ",text_summary,"\n plot    ",plot)
