@@ -42,7 +42,6 @@ with st.form(key='chat_form'):
     user_input = st.text_input("You: ", key='user_input')
     submit_button = st.form_submit_button(label='Send')
 
-show_text_summary= st.checkbox("text_summary", value=True)
 show_plot = st.checkbox("Plot", value=False)
 
 if submit_button and user_input:
