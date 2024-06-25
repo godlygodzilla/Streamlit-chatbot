@@ -4,7 +4,6 @@ import json
 import base64
 from io import BytesIO
 from PIL import Image
-from chatbot_backend.chat.main import run_code
 import pandas as pd
 
 # Function to get a response from the Django backend
