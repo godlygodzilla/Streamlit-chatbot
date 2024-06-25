@@ -9,7 +9,7 @@ import pandas as pd
 
 # Function to get a response from the Django backend
 def get_response(user_input):
-     url = 'http://127.0.0.1:8000/chat/chatbot/'
+     url = 'http://182.78.84.66:8000/chat/chatbot/'
      headers = {'Content-Type': 'application/json'}
      payload = {
          'username': 'example_user',
